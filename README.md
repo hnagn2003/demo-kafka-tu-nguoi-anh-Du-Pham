@@ -1,5 +1,5 @@
 # Kafka demo
-### Our kafka demo for lab's seminar
+### Demo kafka, tác già: Du Phạm vì e ko biết inherite repo gốc như nào
 ## Prerequisites
 * pip
 * npm
