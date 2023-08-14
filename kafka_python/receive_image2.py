@@ -1,9 +1,14 @@
-from kafka import KafkaProducer
-from kafka.errors import KafkaError
+import logging
+from confluent_kafka import Producer, KafkaError
 import cv2
 from datetime import datetime
 import numpy as np
-producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
+
+bootstrap_servers = 'localhost:9092'
+producer_config = {
+    'bootstrap.servers': bootstrap_servers
+}
+producer = Producer(producer_config)
 
 # vidcap = cv2.VideoCapture('nguoianhHoangTung.mp4')
 # success,image = vidcap.read()
@@ -40,6 +45,7 @@ while True:
     try:
         record_metadata = future.get(timeout=10)
     except KafkaError:
+        log = logging.getLogger(__name__)
         log.exception()
         pass
     print ("frame: " + str(count) + ",topic name: " + str(record_metadata.topic) + ",partition: " + str(record_metadata.partition) + ",offset: " + str(record_metadata.offset))
