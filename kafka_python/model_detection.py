@@ -24,6 +24,13 @@ for message in consumer:
     result_string = str(results.pandas())
     print(result_string)
     output_image = results.render()[0]
-    ret, buffer = cv2.imencode('.jpeg', output_image)
-    future = producer.send('represent', buffer.tobytes())
+    # ret, buffer = cv2.imencode('.jpeg', output_image)
+    # future = producer.send('represent', buffer.tobytes())
+    
+    # Display the image
+    cv2.imshow('Received Image', output_image)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cv2.destroyAllWindows()
     
