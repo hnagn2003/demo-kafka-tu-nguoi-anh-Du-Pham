@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw 
+# from PIL import Image, ImageDraw 
 from io import BytesIO
 from confluent_kafka import Producer, Consumer, KafkaError
 import numpy as np
@@ -27,6 +27,7 @@ producer = Producer(producer_config)
 consumer = Consumer(consumer_config)
 consumer.subscribe([topic_in])
 
+
 model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
     
 
@@ -51,7 +52,7 @@ try:
             print(result_string)
 
             # Send the result_string to the output topic
-            producer.produce(topic_out, value=result_string.encode('utf-8'))
+            producer.produce(topic_out, value=result_string)
 
 except KeyboardInterrupt:
     pass
